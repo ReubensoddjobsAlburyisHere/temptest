@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+
+ <html lang="en">
+
+ <head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Reuben's Odd Jobs</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+
+  body {
+
+  background: black url('https://images.unsplash.com/photo-1605296867304-46d5465a13f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center fixed;
+
+  background-size: cover;
+
+  color: white;
+
+  }
+
+  nav, main, footer, section {
+
+  background-color: rgba(0, 0, 0, 0.75);
+
+  border-radius: 10px;
+
+  padding: 1rem;
+
+  margin-bottom: 1rem;
+
+  }
+
+  .btn-container {
+
+  display: flex;
+
+  gap: 1rem;
+
+  flex-wrap: wrap;
+
+  }
+
+  #backToTop {
+
+  position: fixed;
+
+  bottom: 30px;
+
+  right: 30px;
+
+  display: none;
+
+  padding: 0.6rem 1rem;
+
+  font-size: 1rem;
+
+  background: #fff;
+
+  color: #000;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  z-index: 999;
+
+  }
+
+  html {
+
+  scroll-behavior: smooth;
+
+  }
+
+  #careers-embed {
+
+  width: 100%;
+
+  height: 600px;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  }
+
+  #google_translate_element {
+
+  margin-top: 0.5rem;
+
+  position: fixed;
+
+  top: 20px;
+
+  left: 20px;
+
+  z-index: 1000;
+
+  display: none; /* Remove the google translate box. */
+
+  /* background-color: #fff;   Remove the white background */
+
+  padding: 0.5rem;
+
+  border-radius: 5px; /* Remove the border radius */
+
+  }
+
+  .goog-te-gadget {
+
+  font-size: 14px;
+
+  color: #333;
+
+  }
+
+  .goog-te-gadget-simple {
+
+  border: none; /* Remove the border */
+
+  border-radius: 4px;
+
+  padding: 0.3rem 0.5rem;
+
+  cursor: pointer;
+
+  /* background-color: #fff; */ /* Remove white background */
+
+  }
+
+  .goog-te-gadget-icon {
+
+  display: none;
+
+  }
+
+  .goog-te-gadget-text {
+
+  color: #333;
+
+  }
+
+  a.goog-te-menu-value {
+
+  color: #333;
+
+  text-decoration: none;
+
+  }
+
+  a.goog-te-menu-value:hover {
+
+  color: #0078d7;
+
+  }
+
+  .goog-te-menu-frame {
+
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+  border-radius: 5px;
+
+  border: 1px solid #ccc;
+
+  }
+
+
+
+
+
+  /* Search Styles */
+
+  #search-container {
+
+  margin-top: 0.5rem;
+
+  margin-bottom: 1rem;
+
+  position: relative; /* Add relative positioning */
+
+  }
+
+  #search-input {
+
+  padding: 0.5rem;
+
+  border: 2px solid #0078d7;  /* Blue border */
+
+  border-radius: 5px;
+
+  width: 100%;
+
+  max-width: 300px;
+
+  color: #212529;
+
+  padding-right: 2.5rem;
+
+  box-sizing: border-box;
+
+  background-color: #FFFFFF;
+
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  transition: all 0.2s ease;
+
+  }
+
+  #search-input:focus {
+
+  outline: none;
+
+  box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2);
+
+  transform: translateY(-1px);
+
+  }
+
+  #search-button {
+
+  position: absolute;
+
+  top: 50%;
+
+  right: 0.5rem;
+
+  transform: translateY(-50%);
+
+  background: none;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+
+  color: #333;
+
+  }
+
+
+
+  /* Search Results Styles */
+
+  #search-results {
+
+  position: absolute;
+
+  top: 100%;
+
+  left: 0;
+
+  right: auto;
+
+  background-color: rgba(0, 0, 0, 0.8);
+
+  color: #fff;
+
+  padding: 1rem;
+
+  border-radius: 5px;
+
+  z-index: 1000;
+
+  max-width: 300px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  display: none;
+
+  margin-top: 0.5rem;
+
+  }
+
+  #search-results ul {
+
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+
+  }
+
+  #search-results li {
+
+  margin-bottom: 0.5rem;
+
+  border-bottom: 1px solid #666;
+
+  padding-bottom: 0.5rem;
+
+  }
+
+  #search-results li:last-child {
+
+  border-bottom: none;
+
+  padding-bottom: 0;
+
+  }
+
+  #search-results a{
+
+  color: #fff;
+
+  text-decoration: none;
+
+  }
+
+  #search-results a:hover{
+
+  color: #ddd;
+
+  }
+
+  /* Styles for the Support button */
+
+  .support-button {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+
+  padding: 0.5rem 1rem;
+
+  color: #0078d7; /* Make the text blue */
+
+  border: none;
+
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  font-size: 1rem;
+
+  transition: background-color 0.3s ease;
+
+  background-color: transparent; /* Make the background transparent */
+
+  }
+
+  nav ul li a {
+
+  color: #0078d7; /* Sets the default color for all links in the nav */
+
+  text-decoration: none; /* Removes underline */
+
+  }
+
+
+
+  nav ul li a:hover {
+
+  color: #0056b3; /* Darker blue on hover */
+
+  }
+
+
+
+  /* Update Log Styles */
+
+  #update-log-button {
+
+  position: fixed;
+
+  top: 80px; /* Adjusted position */
+
+  left: 20px;
+
+  z-index: 1001;
+
+  cursor: pointer;
+
+  padding: 0.5rem;
+
+  background-color: rgba(0, 0, 0, 0.75);
+
+  border-radius: 5px;
+
+  }
+
+
+
+  #update-log-popup {
+
+  display: none;
+
+  position: fixed;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.95);
+
+  z-index: 1002;
+
+  overflow-y: auto;
+
+  padding: 2rem;
+
+  box-sizing: border-box;
+
+  }
+
+
+
+  #update-log-content {
+
+  background-color: rgba(255, 255, 255, 0.9);
+
+  color: black;
+
+  border-radius: 10px;
+
+  padding: 1rem;
+
+  max-width: 800px;
+
+  margin: 2rem auto;
+
+  }
+
+
+
+  #update-log-close {
+
+  position: absolute;
+
+  top: 1rem;
+
+  right: 1rem;
+
+  font-size: 2rem;
+
+  color: red;
+
+  cursor: pointer;
+
+  }
+
+  </style>
+
+ </head>
+
+ <body>
+
+  <a id="top"></a>
+
+  <nav class="container-fluid">
+
+  <ul>
+
+  <li><strong>Reuben's Odd Jobs</strong></li>
+
+  </ul>
+
+  <ul>
+
+  <li><a href="#booking">📋 Book</a></li>
+
+  <li><a href="#review">🌟 Reviews</a></li>
+
+  <li><a href="#faq">❓ FAQ</a></li>
+
+  <li><a href="#services">🛠️ Services</a></li>
+
+  <li><a href="#prices">💸 Prices</a></li>
+
+  <li><a href="#hours">⏰ Hours</a></li>
+
+  <li><a href="#support">🙏 Support</a></li>
+
+  </ul>
+
+  </nav>
+
+
+
+  <main class="container">
+
+  <div id="google_translate_element"></div>
+
+
+
+  <div id="update-log-button">
+
+  &#x1F4C8; Updates
+
+  </div>
+
+
+
+  <div id="update-log-popup">
+
+  <div id="update-log-content">
+
+  <span id="update-log-close">&times;</span>
+
+  <h3>📰 Update Log - Version 2.3</h3>
+
+  <ul>
+
+  <li>💼 Removed Careers Page</li>
+
+  <li>📄 Added a Support Form</li>
+
+  <li>🗓️ New Hours (For When we are Open)</li>
+
+  <li>💬 New Messages for Hours Section</li>
+
+  <li>❓ New FAQ Questions</li>
+
+  <li>🔎 Search Bar Added</li>
+
+  </ul>
+
+  </div>
+
+  </div>
+
+
+
+  <div id="search-container">
+
+  <input type="text" id="search-input" placeholder="Search Reuben's Odd Jobs">
+
+  <div id="search-results">
+
+  <ul></ul>
+
+  </div>
+
+  </div>
+
+
+
+  <section id="booking">
+
+  <h2>📋 Book a Job</h2>
+
+  <form id="bookingForm">
+
+  <label>🛠️ What service do you need?
+
+  <select name="service" required>
+
+  <option value="">Choose a service</option>
+
+  <option value="Technology Help">🖥️ Technology Help</option>
+
+  <option value="Cleaning">🧼 Cleaning</option>
+
+  <option value="Party Help">🎉 Party Help – Setup or Cleaning After</option>
+
+  <option value="Pet Sitting">🐾 Pet Sitting (Dogs: please share info if they’re large or unfamiliar – safety first!)</option>
+
+  <option value="Errands">🏃 Errands</option>
+
+  <option value="Gardening">🌿 Gardening</option>
+
+  <option value="Senior Assistance">🧑‍⚕️ Senior Assistance (e.g., light help around the house, companionship)</option>
+
+  <option value="House Sitting">🏡 House Sitting (including plant care, mail collection)</option>
+
+  </select>
+
+  </label>
+
+  <label>📅 Availability Date and Time
+
+  <input type="text" name="available" id="datetimepicker" required placeholder="Select date and time">
+
+  </label>
+
+  <label>📘 Facebook Username
+
+  <input type="text" name="fb" required placeholder="e.g. reuben.services">
+
+  </label>
+
+  <label>📍 Where are you?
+
+  <select name="location" required>
+
+  <option>East Albury</option>
+
+  <option>Glenroy</option>
+
+  <option>Lavington</option>
+
+  <option>North Albury</option>
+
+  <option>South Albury</option>
+
+  <option>Springdale Heights</option>
+
+  <option>Thurgoona</option>
+
+  <option>West Albury</option>
+
+  </select>
+
+  </label>
+
+  <label>🏠 Where do you live?
+
+  <input type="text" name="live" required>
+
+  </label>
+
+  <label>💰 Payment Type</label>
+
+  <input type="radio" name="payment" value="Bank Transfer" required> Bank Transfer
+
+  <input type="radio" name="payment" value="In Cash" required> In Cash
+
+  <label>💸 How much are you paying? (AUD)
+
+  <input type="number" name="paying" required>
+
+  </label>
+
+  <label>💬 Ask Reuben More (optional)
+
+  <textarea name="ask"></textarea>
+
+  </label>
+
+  <button type="submit">Submit Booking</button>
+
+  <p id="bookingMessage"></p>
+
+  </form>
+
+  </section>
+
+
+
+  <section id="review">
+
+  <h2>🌟 Leave a Review</h2>
+
+  <form id="reviewForm">
+
+  <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+  <label for="stars">Star Rating (1–5):</label>
+
+  <select id="stars" name="stars" required>
+
+  <option value="">Choose a rating</option>
+
+  <option value="1">⭐ 1 - Not great</option>
+
+  <option value="2">⭐⭐ 2</option>
+
+  <option value="3">⭐⭐⭐ 3 - Okay</option>
+
+  <option value="4">⭐⭐⭐⭐ 4</option>
+
+  <option value="5">⭐⭐⭐⭐⭐ 5 - Excellent!</option>
+
+  </select>
+
+  <textarea id="feedback" name="feedback" placeholder="Write your feedback here..." required></textarea>
+
+  <button type="submit">Submit Review</button>
+
+  <p id="reviewMessage"></p>
+
+  </form>
+
+  </section>
+
+
+
+  <section id="faq">
+
+  <h2>❓ Frequently Asked Questions</h2>
+
+  <ul id="faq-list">
+
+  <li><strong>❌ What are some examples of jobs you don't do?</strong> – I don’t take on heavy construction, electrical work, plumbing, or anything that requires a trade license. I also don’t do full-house deep cleans or lawn mowing at this stage. If you're unsure, just ask! 😊</li>
+
+  <li><strong>📍 What areas do you service?</strong> – I currently serve the following areas around Albury, NSW: • Lavington • Glenroy • Springdale Heights • Albury • Thurgoona If you live just outside these areas, message me and I’ll see what I can do! 😊 Please note: There may be a small fee for locations outside my regular service zone to cover transport costs. I will let you know in advance if the fee applies.</li>
+
+  <li><strong>💰 Why is there a travel fee for some areas?</strong> – Even though I don’t drive yet, I rely on public transport or family to get to jobs outside my main service areas. The travel fee helps cover these transport costs. I'll always let you know in advance if it applies — no surprises! 👍</li>
+
+  <li><strong>📲 How do I book your services?</strong> – You can book a job using the booking form on my website 📝 — it's quick and easy! If you have any questions before booking, feel free to message me through: • Facebook Messenger 💬 Once you submit a booking, I’ll get back to you to confirm the details and arrange a time that suits you. 👍</li>
+
+  <li><strong>❗ What is your cancellation policy?</strong> – Life happens — if you need to cancel or reschedule, please let me know at least 24 hours in advance. No cancellation fees if you give me notice!</li>
+
+  <li><strong>💵 How do you determine your pricing?</strong> – Prices depend on the type of job, how long it takes, and what’s involved. I aim to keep my rates affordable and fair. You’ll always get a quote before I start!</li>
+
+  <li><strong>💳 What forms of payment do you accept?</strong> – I currently accept: • Cash 💵 • Bank transfer 💻</li>
+
+  <li><strong>😕 What if I’m not satisfied with the work?</strong> – Your satisfaction matters. If there’s a problem, please let me know within 24 hours and I’ll do my best to fix it or offer a fair solution. 👍</li>
+
+  <li><strong>⏰ What are your service hours?</strong>
+
+  <br>
+
+  <strong>📘 During School Terms:</strong>
+
+  <ul>
+
+  <li>Monday: 3:30 PM – 4:00 PM 🕒</li>
+
+  <li>Tuesday: CLOSED 🚫</li>
+
+  <li>Wednesday: CLOSED 🚫</li>
+
+  <li>Thursday: 3:30 PM – 6:00 PM 🕒</li>
+
+  <li>Friday: 3:30 PM – 6:00 PM 🕒</li>
+
+  <li>Saturday: 11:00 AM – 6:30 PM 🕚</li>
+
+  <li>Sunday: 11:30 AM – 6:30 PM 🕦</li>
+
+  </ul>
+
+  <strong>🏖️ During School Holidays & Public Holidays:</strong>
+
+  <ul>
+
+  <li>Monday to Sunday: 11:00 AM – 7:30 PM 🕚</li>
+
+  <li>Tuesday: CLOSED 🚫</li>
+
+  </ul>
+
+  <strong>🎄 Special Notices:</strong>
+
+  We are CLOSED on Christmas, New Year’s Day, and Easter. Please book ahead around these dates!
+
+  <strong>📞 After-Hours Info:</strong>
+
+  We do not visit homes after 6:00 PM. However, you’re welcome to contact us for questions or bookings after that time — we’re happy to help remotely. 😊
+
+  </li>
+
+  <li><strong>👨‍🔧 Who is Reuben, and what is his experience?</strong> – Hi! I’m Reuben — I’m 15 years old and based in Albury, NSW. I’ve started Reuben’s Odd Jobs to help people in my community with everyday tasks. I’ve had experience with tech troubleshooting, cleaning, pet care (I have 9 guinea pigs myself 🐹), and more. I take pride in doing every job right!</li>
+
+  <li><strong>🌐 How should I contact you through my website?</strong> – You can contact me anytime through my website's support or booking form. Once I receive your message, I’ll try to respond as soon as I can. When I’m available, I’ll follow up with you on Facebook Messenger. Thanks for reaching out!</li>
+
+  <li><strong>Are there support options available? 🙏</strong> - Yes, you can find support information in the support section of the website.</li>
+
+  </ul>
+
+  </section>
+
+
+
+  <section id="services">
+
+  <h2>🛠️ Services Offered</h2>
+
+  <ul id="services-list">
+
+  <li>🖥️ Technology Help — Between $10–$20</li>
+
+  <li>🧼 Cleaning — Between $15–$25</li>
+
+  <li>🎉 Party Help — Between $15–$25</li>
+
+  <li>🐾 Pet Sitting — Between $10–$20</li>
+
+  <li>🏃 Errands — Between $10–$15</li>
+
+  <li>🌿 Gardening — Between $15–$25</li>
+
+  <li>🧑‍⚕️ Senior Assistance — Between $10–$20</li>
+
+  <li>🏡 House Sitting — Between $15–$25</li>
+
+  </ul>
+
+  </section>
+
+
+
+  <section id="prices">
+
+  <h2>💸 Suggested Prices (AUD)</h2>
+
+  <ul>
+
+  <li>🖥️ Technology Help: $15–$20</li>
+
+  <li>🧼 Cleaning: $10–$15</li>
+
+  <li>🎉 Party Help: $5–$10</li>
+
+  <li>🐾 Pet Sitting: $10–$20</li>
+
+  <li>🏃 Errands: $10–$15</li>
+
+  <li>🌿 Gardening: $15–$25</li>
+
+  <li>🧑‍⚕️ Senior Assistance: $20–$30</li>
+
+  <li>🏡 House Sitting: $25–$40 (depending on duration and tasks)</li>
+
+  </ul>
+
+  <p><em>These prices are here for people who don't know what to pay me. You can pay me anything that's fair that you like — I'm not picky 😊</em></p>
+
+  <p>💬 Not sure what to pay? That’s totally fine! Just give me a fair price — I’m flexible and happy to work with your budget. Below are the typical prices, but if you're unsure what the job is worth, we can work something out.</p>
+
+  </section>
+
+
+
+  <section id="hours">
+
+  <h2>⏰ Opening Hours</h2>
+
+  <h3>During School Term:</h3>
+
+  <ul>
+
+  <li>Monday: 3:40 PM - 6:00 PM</li>
+
+  <li>Tuesday: Closed</li>
+
+  <li>Wednesday: Closed</li>
+
+  <li>Thursday: 3:40 PM - 6:00 PM</li>
+
+  <li>Friday: 3:40 PM - 6:00 PM</li>
+
+  <li>Saturday: 11:00 AM - 6:30 PM</li>
+
+  <li>Sunday: 11:30 AM - 6:30 PM</li>
+
+  </ul>
+
+  <h3>During School Holidays and Public Holidays:</h3>
+
+  <ul>
+
+  <li>Monday: 9:00 AM - 5:00 PM</li>
+
+  <li>Tuesday: Closed</li>
+
+  <li>Wednesday: 9:00 AM - 5:00 PM</li>
+
+  <li>Thursday: 9:00 AM - 5:00 PM</li>
+
+  <li>Friday: 9:00 AM - 5:00 PM</li>
+
+  <li>Saturday: 11:30 AM - 6:30 PM</li>
+
+  <li>Sunday: 11:30 AM - 6:30 PM</li>
+
+  </ul>
+
+  <p>If you have any questions, feel free to email us at <a href="mailto:reubenoddjobsalbury@gmail.com">reubenoddjobsalbury@gmail.com</a>.</p>
+
+  <p>⏰ After 6 PM: We do not go to people's houses after 6:00 PM. The hours after 6 PM are for contacting us only 📞. Please feel free to reach out for inquiries! 😊</p>
+
+  </section>
+
+
+
+  <section id="support">
+
+  <h2>🙏 Support</h2>
+
+  <p>
+
+  For any questions or assistance, please don't hesitate to reach out. We're here to help! You can contact us via Our Support Form!:
+
+  <p><a href="[https://reubensoddjobsalburyishere.github.io/SupportWebsiteReuben/]">Support Form</a></p>
+
+  </section>
+
+ 
+
+
+
+  <section id="legal">
+
+  <h2>📄 Privacy Policy</h2>
+
+  <p><strong>What We Collect:</strong> Your name, Facebook username, location, email (if provided), availability, and any extra notes submitted through our forms.</p>
+
+  <p><strong>Why We Collect It:</strong> To ensure accurate bookings, provide quality service, and to follow up on inquiries or feedback.</p>
+
+  <p><strong>How It’s Used:</strong> We use your info only for Reuben’s Odd Jobs services. We will never sell, rent, or share your data with third parties.</p>
+
+  <p><strong>Data Security:</strong> Your data is securely handled through EmailJS, a trusted service for form submission. We don’t store your info in databases.</p>
+
+  <p><strong>Control Over Your Data:</strong> You can request to delete your data at any time by contacting Reuben directly via Messenger or through the booking confirmation email.</p>
+
+  <p><strong>Cookies:</strong> We do not use cookies. No tracking tech is installed on this site.</p>
+
+  <p><strong>Children’s Privacy:</strong> We do not knowingly collect data from anyone under 13 years old.</p>
+
+
+
+  <hr>
+
+  <h2>📄 Terms of Service</h2>
+
+  <p><strong>By using Reuben’s Odd Jobs, you agree to the following:</strong></p>
+
+  <ul>
+
+  <li>✅ Bookings must be accurate and truthful.</li>
+
+  <li>✅ Reschedules must be made with at least 24 hours’ notice.</li>
+
+  <li>✅ Payments must be made promptly after services are completed (in AUD).</li>
+
+  <li>✅ If you’re not home, clear access instructions must be provided.</li>
+
+  <li>✅ You are responsible for disclosing important info (like pets, alarms, etc.).</li>
+
+  <li>✅ You must treat Reuben with respect and fairness (as he will do the same!).</li>
+
+  <li>⚠️ Abusive behavior, false bookings, or repeated no-shows may result in refusal of future service.</li>
+
+  <li>⚠️ Reuben reserves the right to refuse or cancel a booking if safety or other concerns arise.</li>
+
+  <li>🚧 Prices are suggested only – you're welcome to offer what you think is fair (in AUD).</li>
+
+  </ul>
+
+  </section>
+
+  </main>
+
+
+
+  <footer class="container">
+
+  <small>&copy; 2025 Reuben's Odd Jobs • All rights reserved.</small>
+
+  </footer>
+
+
+
+  <button id="backToTop" onclick="window.location.href='#top'">⬆️ Back to Top</button>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script type="text/javascript">
+
+  function googleTranslateElementInit() {
+
+  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+
+  }
+
+  </script>
+
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <script>
+
+  flatpickr("#datetimepicker", {
+
+  enableTime: true,
+
+  dateFormat: "Y-m-d H:i",
+
+  minDate: "today" // This line prevents users from selecting past dates
+
+  });
+
+
+
+  emailjs.init("WL1HOHwEgsBKUWDyq");
+
+
+
+  document.getElementById("bookingForm")?.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  emailjs.send("service_ze5r19d", "template_q0jfnv2", {
+
+  service: this.service.value,
+
+  available: this.available.value,
+
+  fb: this.fb.value,
+
+  location: this.location.value,
+
+  live: this.live.value,
+
+  payment: this.payment.value,
+
+  paying: this.paying.value,
+
+  ask: this.ask.value
+
+  }).then(() => {
+
+  document.getElementById("bookingMessage").innerHTML = '<span class="success">✅ Booking successfully sent! I’ll contact you within 4 hours to 2 days.</span>';
+
+  this.reset();
+
+  });
+
+  });
+
+
+
+  document.getElementById("reviewForm")?.addEventListener("submit", function(e) {
+
+  e.preventDefault();
+
+  emailjs.send("service_ze5r19d", "template_bnn168s", {
+
+  name: this.name.value,
+
+  stars: this.stars.value,
+
+  feedback: this.feedback.value
+
+  }).then(() => {
+
+  document.getElementById("reviewMessage").innerHTML = '<span class="success">✅ Review successfully sent!</span>';
+
+  this.reset();
+
+  });
+
+  });
+
+
+
+  const backToTop = document.getElementById('backToTop');
+
+  window.onscroll = () => {
+
+  backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+
+  };
+
+
+
+  // Search functionality
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+  const searchInput = document.getElementById('search-input');
+
+  const searchResults = document.getElementById('search-results');
+
+  const sections = document.querySelectorAll('main > section'); // Get all main sections
+
+  const faqList = document.getElementById('faq-list');
+
+
+
+
+
+  /**
+
+  * Clears the search results area.
+
+  */
+
+  function clearSearchResults() {
+
+  searchResults.style.display = 'none';
+
+  searchResults.querySelector('ul').innerHTML = '';
+
+  }
+
+
+
+  /**
+
+  * Performs the search and displays the results.
+
+  * @param {string} searchTerm - The term to search for.
+
+  */
+
+  function performSearch(searchTerm) {
+
+  searchTerm = searchTerm.toLowerCase().trim(); // Convert to lowercase and remove extra spaces
+
+  let resultsFound = false;
+
+  const resultsHTML = document.createElement('ul');
+
+
+
+  sections.forEach(section => {
+
+  const sectionText = section.textContent.toLowerCase();
+
+  const sectionId = section.getAttribute('id');
+
+  const sectionHeading = section.querySelector('h2')?.textContent || sectionId; //gets the heading of the section.
+
+
+
+  if (sectionText.includes(searchTerm)) {
+
+  resultsFound = true;
+
+  const listItem = document.createElement('li');
+
+  // Highlight only the matchingterm
+
+  const highlightedText = sectionText.replace(
+
+  new RegExp(searchTerm, 'gi'),
+
+  `<span class="highlight">${searchTerm}</span>`
+
+  );
+
+  listItem.innerHTML = `<a href="#${sectionId}" data-section-id="${sectionId}">${sectionHeading}</a>`;
+
+  resultsHTML.appendChild(listItem);
+
+  }
+
+  });
+
+
+
+  //search the faq list
+
+  if(faqList){
+
+  const faqItems = faqList.getElementsByTagName('li');
+
+  for (let i = 0; i < faqItems.length; i++) {
+
+  const faqItemText = faqItems[i].textContent.toLowerCase();
+
+  if (faqItemText.includes(searchTerm)) {
+
+  resultsFound = true;
+
+  const listItem = document.createElement('li');
+
+  // Highlight only the matching term
+
+  const highlightedText = faqItemText.replace(
+
+  new RegExp(searchTerm, 'gi'),
+
+  `<span class="highlight">${searchTerm}</span>`
+
+  );
+
+
+
+  listItem.innerHTML = `<a href="#faq" data-section-id="faq">${highlightedText}</a>`;  // Store section ID
+
+  resultsHTML.appendChild(listItem);
+
+  }
+
+  }
+
+  }
+
+
+
+  if (resultsFound) {
+
+  searchResults.innerHTML = ''; // Clear previous results
+
+  searchResults.appendChild(resultsHTML);
+
+  searchResults.style.display = 'block';
+
+  } else {
+
+  searchResults.innerHTML = '<p>No matching results found.</p>';
+
+  searchResults.style.display = 'block';
+
+  }
+
+  }
+
+
+
+  // Event listener for input changesin the search input
+
+  searchInput.addEventListener('input', function() {
+
+  const searchTerm = this.value.trim();
+
+  if (searchTerm === '') {clearSearchResults();
+
+  }else {
+
+  performSearch(searchTerm);
+
+  }});
+
+
+
+
+
+
+
+  // Event listener for the 'Enter' key press in the search input
+
+  searchInput.addEventListener('keypress', function(event) {
+
+  if (event.key === 'Enter') {
+
+  const searchTerm = this.value.trim();
+
+  performSearch(searchTerm);
+
+  }
+
+  });
+
+
+
+  // Event listener for clicks on search results to highlight the section
+
+  searchResults.addEventListener('click', function(event) {
+
+  const target = event.target;
+
+  if (target.tagName === 'A') {
+
+  const sectionId = target.getAttribute('data-section-id'); // Get the stored section ID
+
+  if (sectionId) {
+
+  const section = document.getElementById(sectionId);if (section) {
+
+  // Remove any existing highlights
+
+
+
+  document.querySelectorAll('.highlight').forEach(el => el.classList.remove('highlight'));
+
+  // Scroll to the section
+
+  section.scrollIntoView({ behavior: 'smooth' });
+
+  // Add highlight class
+
+  section.classList.add('highlight');
+
+  // Remove highlight after 3 seconds
+
+  setTimeout(() => {
+
+  section.classList.remove('highlight');
+
+  }, 3000);
+
+  }
+
+  }
+
+  }
+
+  });
+
+
+
+
+
+  // Update Log Popup
+
+  const updateLogButton = document.getElementById('update-log-button');
+
+  const updateLogPopup = document.getElementById('update-log-popup');
+
+  const updateLogClose = document.getElementById('update-log-close');
+
+
+
+  updateLogButton.addEventListener('click', () => {
+
+  updateLogPopup.style.display = 'block';
+
+  });
+
+
+
+  updateLogClose.addEventListener('click', () => {
+
+  updateLogPopup.style.display = 'none';
+
+  });
+
+
+
+  });
+
+
+
+  </script>
+
+  <style>
+
+  .highlight {
+
+  background-color: rgba(255, 255, 0, 0.3); /* Light yellow highlight */
+
+  transition: background-color 0.5s ease;  /* Smooth transition */
+
+  }
+
+  </style>
+
+ </body>
+
+ </html> 
